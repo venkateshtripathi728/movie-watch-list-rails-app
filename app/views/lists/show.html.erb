@@ -1,4 +1,17 @@
 <h1>List details</h1>
-<p><%= @list.name %></p> <%= console %>
+<p><%= @list.name %></p>
+<%= link_to 'add a movie', new_list_bookmark_path(@list) %>
+<ul class="list-group">
+  <% @list.movies.each do |movie| %>
+   <% @bookmark = Bookmark.find_by(list: @list, movie: movie)%> 
+    <li class="list-group-item"><%= movie.title %>
+    </li>
+    <div class="container">
+    <li><%= @bookmark.comment %><%= link_to 'delete', bookmark_path(@bookmark), method: :delete%></li>
+
+    </div>
+  <% end %>
+</ul>
 <%= link_to  "Back to list", lists_path %>
 <%= link_to  "Give a comment", new_list_bookmark_path(@list) %>
+ <%= link_to  "delete", list_path(@list), method: "delete" %></li>
